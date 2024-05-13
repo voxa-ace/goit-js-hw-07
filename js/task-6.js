@@ -8,6 +8,7 @@ createBtn.addEventListener('click', () => {
   if (amount < 1 || amount > 100) {
     return;
   }
+  destroyBoxes();
   createBoxes(amount);
   input.value = '';
 });
@@ -16,14 +17,18 @@ destroyBtn.addEventListener('click', destroyBoxes);
 
 function createBoxes(amount) {
   const initialSize = 30;
+  const fragment = document.createDocumentFragment();
+
   for (let i = 0; i < amount; i++) {
     const box = document.createElement('div');
     const size = initialSize + i * 10;
     box.style.width = `${size}px`;
     box.style.height = `${size}px`;
     box.style.backgroundColor = getRandomHexColor();
-    boxesContainer.appendChild(box);
+    fragment.appendChild(box);
   }
+
+  boxesContainer.appendChild(fragment);
 }
 
 function destroyBoxes() {
